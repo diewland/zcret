@@ -15,7 +15,7 @@ $('#btn_decode').click(_ => {
     $('#msg_output').removeClass('is-invalid');
   }
   else {
-    $('#msg_output').val('');
+    $('#msg_output').val('Sorry, Invalid secret :/');
     $('#msg_output').removeClass('is-valid');
     $('#msg_output').addClass('is-invalid');
   }
