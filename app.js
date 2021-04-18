@@ -9,13 +9,27 @@ $('#btn_decode').click(_ => {
   let input = $('#msg_input').val();
   let pwd = $('#password').val();
   let out = algo_decode(input, pwd);
-  $('#msg_output').val(out);
+  if (out) {
+    $('#msg_output').val(out);
+    $('#msg_output').addClass('is-valid');
+    $('#msg_output').removeClass('is-invalid');
+  }
+  else {
+    $('#msg_output').val('');
+    $('#msg_output').removeClass('is-valid');
+    $('#msg_output').addClass('is-invalid');
+  }
 });
 
 // algorithm
 function algo_encode(msg, pwd) {
-  return Base64.encode(`${pwd.repeat(3)}${msg}${pwd.repeat(3)}`);
+  return Base64.encode(`${pwd.repeat(3)}${msg}`);
 }
 function algo_decode(msg, pwd) {
-  return Base64.decode(msg).replaceAll(`${pwd.repeat(3)}`, '');
+  if (!pwd) return null;
+  let plain = Base64.decode(msg);
+  let header = pwd.repeat(3);
+  if (plain.startsWith(header))
+    return plain.replace(header, '');
+  return null;
 }
