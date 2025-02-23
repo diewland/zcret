@@ -20,6 +20,7 @@ $('#btn_decode').click(_ => {
     $('#msg_output').addClass('is-invalid');
   }
 });
+$('#msg_input').focus();
 
 // algorithm
 function algo_encode(msg, pwd) {
